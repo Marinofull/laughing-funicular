@@ -15,46 +15,47 @@ WHITESPACE  [ \t\n]
 
 %%
 
-def         {printf("KEY \"%s\"\n",yytext);}
-if          {printf("KEY \"%s\"\n",yytext);}
-else        {printf("KEY \"%s\"\n",yytext);}
-while       {printf("KEY \"%s\"\n",yytext);}
-return      {printf("KEY \"%s\"\n",yytext);}
-break       {printf("KEY \"%s\"\n",yytext);}
-continue    {printf("KEY \"%s\"\n",yytext);}
-int         {printf("KEY \"%s\"\n",yytext);}
-void        {printf("KEY \"%s\"\n",yytext);}
+def         {fprintf(yyout, "KEY \"%s\"\n",yytext);}
+if          {fprintf(yyout, "KEY \"%s\"\n",yytext);}
+else        {fprintf(yyout, "KEY \"%s\"\n",yytext);}
+while       {fprintf(yyout, "KEY \"%s\"\n",yytext);}
+return      {fprintf(yyout, "KEY \"%s\"\n",yytext);}
+break       {fprintf(yyout, "KEY \"%s\"\n",yytext);}
+continue    {fprintf(yyout, "KEY \"%s\"\n",yytext);}
+int         {fprintf(yyout, "KEY \"%s\"\n",yytext);}
+void        {fprintf(yyout, "KEY \"%s\"\n",yytext);}
 
-"("         {printf("SYM \"%s\"\n",yytext);}
-"{"         {printf("SYM \"%s\"\n",yytext);}
-"["         {printf("SYM \"%s\"\n",yytext);}
-"]"         {printf("SYM \"%s\"\n",yytext);}
-"}"         {printf("SYM \"%s\"\n",yytext);}
-")"         {printf("SYM \"%s\"\n",yytext);}
-","         {printf("SYM \"%s\"\n",yytext);}
-";"         {printf("SYM \"%s\"\n",yytext);}
-"="         {printf("SYM \"%s\"\n",yytext);}
-"+"         {printf("SYM \"%s\"\n",yytext);}
-"-"         {printf("SYM \"%s\"\n",yytext);}
-"*"         {printf("SYM \"%s\"\n",yytext);}
-"/"         {printf("SYM \"%s\"\n",yytext);}
-"<"         {printf("SYM \"%s\"\n",yytext);}
-">"         {printf("SYM \"%s\"\n",yytext);}
-"<="        {printf("SYM \"%s\"\n",yytext);}
-">="        {printf("SYM \"%s\"\n",yytext);}
-"=="        {printf("SYM \"%s\"\n",yytext);}
-"!="        {printf("SYM \"%s\"\n",yytext);}
-"&&"        {printf("SYM \"%s\"\n",yytext);}
-"||"        {printf("SYM \"%s\"\n",yytext);}
-"!"         {printf("SYM \"%s\"\n",yytext);}
+"("         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"{"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"["         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"]"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"}"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+")"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+","         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+";"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"="         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"+"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"-"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"*"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"/"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"<"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+">"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"<="        {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+">="        {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"=="        {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"!="        {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"&&"        {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"||"        {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"!"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
 
-{DIGIT}+    {printf("DEC \"%s\"\n",yytext);}
-{ID}+       {printf("ID \"%s\"\n",yytext);}
+{DIGIT}+    {fprintf(yyout, "DEC \"%s\"\n",yytext);}
+{ID}+       {fprintf(yyout, "ID \"%s\"\n",yytext);}
 
 {WHITESPACE}+ /*Terminate it*/
 {COMMENT}+ /*Terminate it*/
 
-.           {printf("\n Símbolo não reconhecido: '%s'\n",yytext);}
+<<EOF>>     {return -1;}
+.           {fprintf(yyout, "\n Símbolo não reconhecido: '%s'\n",yytext);}
 
 %%
 
@@ -62,8 +63,10 @@ int yywrap();
 
 int main(int argc, char *argv[]){
     yyin = fopen(argv[1], "r");
+    yyout = fopen(argv[2], "w");
     yylex();
     fclose(yyin);
+    fclose(yyout);
     return 0;
 }
 
