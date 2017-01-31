@@ -60,8 +60,10 @@ void        {printf("KEY \"%s\"\n",yytext);}
 
 int yywrap();
 
-int main(){
+int main(int argc, char *argv[]){
+    yyin = fopen(argv[1], "r");
     yylex();
+    fclose(yyin);
     return 0;
 }
 
