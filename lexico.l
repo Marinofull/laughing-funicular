@@ -8,7 +8,7 @@ Copyright (c) 2017 Jefferson Renè
 %}
 
 DIGIT       [0-9]
-ID          [a-zA-Z][a-zA-Z0-9]*
+ID          [a-zA-Z][a-zA-Z0-9_]*
 COMMENT     [//].*\n
 CHAR        [a-zA-Z]
 WHITESPACE  [ \t\n]

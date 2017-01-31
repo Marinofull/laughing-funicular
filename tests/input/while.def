@@ -1,9 +1,9 @@
 int main(){
 
     int i = 0;
-    (i)? i : 0;
+    (i)? _i_lala : 0;
     while(i < n){
-        printf(i);
+        printf(i); //isso n eh pra mostrar
         i = i + 1;
     }
 
