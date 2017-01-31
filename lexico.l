@@ -9,7 +9,7 @@ Copyright (c) 2017 Jefferson Renè
 
 DIGIT       [0-9]
 ID          [a-zA-Z][a-zA-Z0-9]*
-COMMENT     [^*//]*
+COMMENT     [//].*\n
 CHAR        [a-zA-Z]
 WHITESPACE  [ \t\n]
 
@@ -52,6 +52,9 @@ void        {printf("KEY \"%s\"\n",yytext);}
 {ID}+       {printf("ID \"%s\"\n",yytext);}
 
 {WHITESPACE}+ /*Terminate it*/
+{COMMENT}+ /*Terminate it*/
+
+.           {printf("\n Símbolo não reconhecido: '%s'\n",yytext);}
 
 %%
 
