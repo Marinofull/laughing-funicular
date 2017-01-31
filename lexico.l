@@ -4,9 +4,6 @@ Copyright (c) 2017 Marino Hohenheim
 Copyright (c) 2017 Jefferson Renè
 */
 
-%{
-%}
-
 DIGIT       [0-9]
 ID          [a-zA-Z][a-zA-Z0-9_]*
 COMMENT     [//].*\n
@@ -54,8 +51,7 @@ void        {fprintf(yyout, "KEY \"%s\"\n",yytext);}
 {WHITESPACE}+ /*Terminate it*/
 {COMMENT}+ /*Terminate it*/
 
-<<EOF>>     {return -1;}
-.           {fprintf(yyout, "\n Símbolo não reconhecido: '%s'\n",yytext);}
+.           {fprintf(yyout, "num leu n: '%s'\n",yytext);}
 
 %%
 
