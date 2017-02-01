@@ -1,0 +1,5 @@
+#ignore flex and C/C++ outputs
+*.yy.c
+a.out
+/tests/output/*
+*.swp

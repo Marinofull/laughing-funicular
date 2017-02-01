@@ -1,4 +1,4 @@
-### This is an awesome Laughing Fonicular
+## This is an awesome Laughing Fonicular
 
 
 - Dependecies:
