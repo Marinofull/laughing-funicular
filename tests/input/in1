@@ -1,7 +1,6 @@
-def int main()
+def main()
 {
-    int a;
+    let a;
     a = 4 + 5;
     return a;
-
 }
