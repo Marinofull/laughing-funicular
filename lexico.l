@@ -6,6 +6,7 @@ Copyright (c) 2017 Jefferson Renè
 
 DIGIT       [0-9]
 ID          [a-zA-Z][a-zA-Z0-9_]*
+DOIDO       [0-9]+[a-zA-Z0-9_]*
 COMMENT     [//].*
 WHITESPACE  [ \t]
 
@@ -42,14 +43,15 @@ continue    {fprintf(yyout, "KEY \"%s\" %d\n",yytext, yylineno);}
 "!"         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
 
 {DIGIT}+    {fprintf(yyout, "DEC \"%s\" %d\n",yytext, yylineno);}
-{ID}+       {fprintf(yyout, "ID \"%s\" %d\n",yytext, yylineno);}
+{ID}       {fprintf(yyout, "ID \"%s\" %d\n",yytext, yylineno);}
 
 {WHITESPACE}+ /*Terminate it*/
 {COMMENT}+ /*Terminate it*/
 
 "\n"    yylineno++;
 
-.           {fprintf(yyout, "ERROR: '%s'\n",yytext);}
+{DOIDO}     {fprintf(yyout, "ERROR: '%s' %d\n",yytext, yylineno);}
+.           {fprintf(yyout, "ERROR: '%s' %d\n",yytext, yylineno);}
 
 %%
 
