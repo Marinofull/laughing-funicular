@@ -50,8 +50,8 @@ continue    {fprintf(yyout, "KEY \"%s\" %d\n",yytext, yylineno);}
 
 "\n"    yylineno++;
 
-{DOIDO}     {fprintf(yyout, "ERROR: '%s' %d\n",yytext, yylineno);}
-.           {fprintf(yyout, "ERROR: '%s' %d\n",yytext, yylineno);}
+{DOIDO}     {fprintf(yyout, "ERROR \"%s\" %d\n",yytext, yylineno);}
+.           {fprintf(yyout, "ERROR \"%s\" %d\n",yytext, yylineno);}
 
 %%
 
