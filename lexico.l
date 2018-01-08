@@ -6,52 +6,52 @@ Copyright (c) 2017 Jefferson Renè
 
 DIGIT       [0-9]
 ID          [a-zA-Z][a-zA-Z0-9_]*
-COMMENT     [//].*\n
-CHAR        [a-zA-Z]
-WHITESPACE  [ \t\n]
+DOIDO       [0-9]+[a-zA-Z0-9_]*
+COMMENT     [//].*
+WHITESPACE  [ \t]
 
 %%
 
-def         {fprintf(yyout, "KEY \"%s\"\n",yytext);}
-if          {fprintf(yyout, "KEY \"%s\"\n",yytext);}
-else        {fprintf(yyout, "KEY \"%s\"\n",yytext);}
-while       {fprintf(yyout, "KEY \"%s\"\n",yytext);}
-return      {fprintf(yyout, "KEY \"%s\"\n",yytext);}
-break       {fprintf(yyout, "KEY \"%s\"\n",yytext);}
-continue    {fprintf(yyout, "KEY \"%s\"\n",yytext);}
-int         {fprintf(yyout, "KEY \"%s\"\n",yytext);}
-void        {fprintf(yyout, "KEY \"%s\"\n",yytext);}
+let         {fprintf(yyout, "KEY \"%s\" %d\n",yytext, yylineno);}
+def         {fprintf(yyout, "KEY \"%s\" %d\n",yytext, yylineno);}
+if          {fprintf(yyout, "KEY \"%s\" %d\n",yytext, yylineno);}
+else        {fprintf(yyout, "KEY \"%s\" %d\n",yytext, yylineno);}
+while       {fprintf(yyout, "KEY \"%s\" %d\n",yytext, yylineno);}
+return      {fprintf(yyout, "KEY \"%s\" %d\n",yytext, yylineno);}
+break       {fprintf(yyout, "KEY \"%s\" %d\n",yytext, yylineno);}
+continue    {fprintf(yyout, "KEY \"%s\" %d\n",yytext, yylineno);}
 
-"("         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"{"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"["         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"]"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"}"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-")"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-","         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-";"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"="         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"+"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"-"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"*"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"/"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"<"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-">"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"<="        {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-">="        {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"=="        {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"!="        {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"&&"        {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"||"        {fprintf(yyout, "SYM \"%s\"\n",yytext);}
-"!"         {fprintf(yyout, "SYM \"%s\"\n",yytext);}
+"("         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"{"         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"}"         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+")"         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+","         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+";"         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"="         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"+"         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"-"         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"*"         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"/"         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"<"         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+">"         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"<="        {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+">="        {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"=="        {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"!="        {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"&&"        {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"||"        {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
+"!"         {fprintf(yyout, "SYM \"%s\" %d\n",yytext, yylineno);}
 
-{DIGIT}+    {fprintf(yyout, "DEC \"%s\"\n",yytext);}
-{ID}+       {fprintf(yyout, "ID \"%s\"\n",yytext);}
+{DIGIT}+    {fprintf(yyout, "DEC \"%s\" %d\n",yytext, yylineno);}
+{ID}       {fprintf(yyout, "ID \"%s\" %d\n",yytext, yylineno);}
 
 {WHITESPACE}+ /*Terminate it*/
 {COMMENT}+ /*Terminate it*/
 
-.           {fprintf(yyout, "num leu n: '%s'\n",yytext);}
+"\n"    yylineno++;
+
+{DOIDO}     {fprintf(yyout, "ERROR \"%s\" %d\n",yytext, yylineno);}
+.           {fprintf(yyout, "ERROR \"%s\" %d\n",yytext, yylineno);}
 
 %%
 
